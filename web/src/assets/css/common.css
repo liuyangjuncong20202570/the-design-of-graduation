@@ -1,0 +1,43 @@
+body {
+  /* height: 100vh; */
+  color: #333;
+  font-size: 18px;
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    position: absolute;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #8b8b8b;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #ddd;
+  }
+}
+/* css中定义变量 */
+:root {
+  --el-font-size-base: 16px !important;
+  --el-text-color-primary: #333;
+  --el-color-primary: #27b597 !important;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.text-1 {
+  -webkit-line-clamp: 1;
+}
+
+.text-2 {
+  -webkit-line-clamp: 2;
+}
+
+img {
+  vertical-align: top;
+}
