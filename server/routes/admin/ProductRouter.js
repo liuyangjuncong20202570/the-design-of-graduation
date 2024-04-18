@@ -12,10 +12,7 @@ ProductRouter.post(
   upload.single('file'),
   ProductController.updList
 );
-// NewsRouter.post('/LYapi/admin/news/updList', upload.single('file'), NewsController.updList);
-// NewsRouter.post('/LYapi/admin/news/newsList', NewsController.getList);
-// NewsRouter.get('/LYapi/admin/news/getList/:id', NewsController.getList);
-// NewsRouter.put('/LYapi/admin/news/publish', NewsController.listPublish);
+ProductRouter.post('/LYapi/admin/product/ispublish', ProductController.isPublish);
 ProductRouter.delete('/LYapi/admin/product/delList/:id', ProductController.delList);
 
 module.exports = ProductRouter;

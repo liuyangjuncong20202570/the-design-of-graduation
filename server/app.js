@@ -3,10 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const UserRouter = require('./routes/admin/UserRouter');
+const ProductInfoRouter = require('./routes/admin/ProductInfoRouter');
+const ProductTypeRouter = require('./routes/admin/ProductTypeRouter');
 const JWT = require('./util/JWT');
 const { EXPIRETIME } = require('./assets/js/data');
 const NewsRouter = require('./routes/admin/NewsRouter');
@@ -32,7 +34,11 @@ app.use('/users', usersRouter);
 app.use(webNewsRouter);
 app.use(webProductRouter);
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // 登录页面的路由控制
+app.use(ProductInfoRouter);
+app.use(ProductTypeRouter);
 app.use((req, res, next) => {
   // 如果是登录路由则放行
   console.log(req.url);
@@ -68,6 +74,7 @@ app.use((req, res, next) => {
     }
   }
 });
+
 app.use(GestRouter);
 app.use(UserRouter);
 app.use(NewsRouter);

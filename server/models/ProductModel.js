@@ -3,13 +3,12 @@ const Schema = mongoose.Schema;
 
 // user模型 ===> user集合（user表 ）
 const productType = {
-  title: { type: String, required: true, unique: true },
+  title: { type: String, required: true, unique: true }, //商品名
   category: { type: Number, required: true }, //商品类别
-  content: String,
-  detail: mongoose.Schema.Types.Mixed, //类别，用1，2，3控制
-  cover: String, //封面者
-  price: Number, //价格
-  editTime: Date
+  content: String, //商品内容
+  cover: String, //封面
+  isPublish: Number, //是否发布一开始默认不发布为0
+  editTime: Date //编辑时间
 };
 // 创建use实例
 const ProductModel = mongoose.model('product', new Schema(productType));

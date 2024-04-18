@@ -2,7 +2,7 @@ export const validateData = {
   title: [
     {
       required: true,
-      message: '新闻标题不可为空',
+      message: '标题不可为空',
       trigger: 'blur'
     }
   ],
@@ -10,28 +10,28 @@ export const validateData = {
     {
       type: 'number',
       required: true,
-      message: '产品价格不可为空并且为数字',
+      message: '价格不可为空并且为数字',
       trigger: 'blur'
     }
   ],
   content: [
     {
       required: true,
-      message: '新闻内容不可为空',
+      message: '内容不可为空',
       trigger: 'blur'
     }
   ],
   category: [
     {
       required: true,
-      message: '请选择新闻类别',
+      message: '请选择类别',
       trigger: 'blur'
     }
   ],
   cover: [
     {
       required: true,
-      message: '新闻封面不可为空',
+      message: '封面不可为空',
       trigger: 'blur'
     }
   ],
@@ -88,6 +88,55 @@ export const validateData = {
     {
       required: true,
       message: '产品详述不可为空',
+      trigger: 'blur'
+    }
+  ],
+  totalStore: [
+    {
+      required: true,
+      message: '总库存不可为空，且子属性所含库存不可超过总库存',
+      trigger: 'blur'
+    }
+  ],
+  productBrand: [
+    {
+      required: true,
+      message: '产品品牌不可为空',
+      trigger: 'blur'
+    }
+  ],
+  productType: [
+    {
+      required: true,
+      message: '产品类型不可为空',
+      trigger: 'blur'
+    }
+  ],
+  productMteri: [
+    {
+      required: true,
+      message: '产品材质不可为空',
+      trigger: 'blur'
+    }
+  ],
+  productAge: [
+    {
+      required: true,
+      message: '产品品牌不可为空',
+      trigger: 'blur'
+    }
+  ],
+  sideCover: [
+    {
+      required: true,
+      message: '产品图不可为空',
+      trigger: 'blur'
+    }
+  ],
+  content: [
+    {
+      required: true,
+      message: '产品内容不可为空',
       trigger: 'blur'
     }
   ]

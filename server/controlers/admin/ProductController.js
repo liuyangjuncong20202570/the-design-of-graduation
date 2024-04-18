@@ -3,19 +3,19 @@ const ProductController = {
   add: async (req, res) => {
     // 调用service对数据库进行增删改查
     const cover = req.file ? `/productuploads/${req.file.filename}` : '';
-    const { title, category, content, detail, price } = req.body;
+    const { title, category, content } = req.body;
     try {
-      await ProductService.add({
+      const _id = await ProductService.add({
         title,
-        category,
+        category: Number(category),
         content,
-        detail,
         cover,
-        price,
+        isPublish: 0,
         editTime: new Date()
       });
       res.send({
-        ActionType: 'OK'
+        ActionType: 'OK',
+        _id
       });
       return;
     } catch (error) {
@@ -37,17 +37,19 @@ const ProductController = {
       });
     }
   },
-  // listPublish: async (req, res) => {
-  //   const result = await NewsService.listPublish({
-  //     ...req.body,
-  //     editTime: new Date()
-  //   });
-  //   if (result) {
-  //     res.send({
-  //       ActionType: 'OK'
-  //     });
-  //   }
-  // },
+  isPublish: async (req, res) => {
+    const { _id, isPublish } = req.body;
+    const result = await ProductService.isPublish({
+      _id,
+      isPublish,
+      editTime: new Date()
+    });
+    if (result) {
+      res.send({
+        ActionType: 'OK'
+      });
+    }
+  },
   delList: async (req, res) => {
     const result = await ProductService.delList({ _id: req.params.id });
     if (result) {
@@ -58,13 +60,12 @@ const ProductController = {
   },
   updList: async (req, res) => {
     const cover = req.file ? `/productuploads/${req.file.filename}` : '';
-    const { title, category, content, detail, _id } = req.body;
+    const { title, category, content, _id } = req.body;
     var result = await ProductService.updList({
       _id,
       title,
       category,
       content,
-      detail,
       cover,
       editTime: new Date()
     });
