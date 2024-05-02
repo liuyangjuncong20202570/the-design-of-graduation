@@ -17,12 +17,19 @@ export const AddProductInfo = params => {
   });
 };
 
+export const AddProductTypeInfo = params => {
+  return request.post({
+    url: '/admin/producttype/addInfos',
+    data: params
+  });
+};
+
 export const AddProductType = params => {
   return request.post({
-    url: '/admin/producttype/add',
+    url: '/admin/producttype/addImages',
     data: params,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     }
   });
 };

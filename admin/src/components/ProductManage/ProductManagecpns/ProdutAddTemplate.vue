@@ -28,6 +28,10 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="产品价格">
+        <el-input v-model="ProductForm.price" />
+        <span v-if="ProductForm.price === 0" class="count">商品总单价不可为空</span>
+      </el-form-item>
     </div>
     <div class="Info">
       <div :style="{ marginBottom: '15px' }">销售信息</div>
@@ -71,9 +75,11 @@ import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import useProduct from '@/stores/modules/useProduct';
 
+const slideCovs = ref([]);
 const router = useRouter();
 const ProductFormRef = ref();
 const ProductForm = reactive({
+  price: 0,
   title: '',
   content: '',
   category: 1, //1 最新动态， 2典型案例， 3通知公告
@@ -134,11 +140,13 @@ const ProductRules = reactive(validateData);
 // 封面处理函数
 const getFile = file => {
   ProductForm.cover = URL.createObjectURL(file);
+  // console.log(ProductForm.cover);
   ProductForm.file = file;
 };
 const getsildeFile = (file, index) => {
   slideCovers[index].slideCover = URL.createObjectURL(file);
   slideCovers[index].file = file;
+  slideCovs.value.push(file);
 };
 const handleEvent = data => {
   ProductForm.content = data;
@@ -152,11 +160,19 @@ const productStore = useProduct();
 const submitForm = async () => {
   const { productInfo } = storeToRefs(productStore);
   ProductFormRef.value.validate(async valid => {
+    // console.log(slideCovs.value);
+    const formData = new FormData();
+
+    slideCovs.value.forEach((file, index) => {
+      formData.append(`images`, file);
+    });
     if (valid) {
-      const res = await productStore.fetchProductAdd(ProductForm, innerData.value, {
-        data: productInfo.value,
-        slideCovers
-      });
+      const res = await productStore.fetchProductAdd(
+        ProductForm,
+        innerData.value,
+        formData,
+        productInfo.value
+      );
       if (res) {
         ElMessage({
           message: '添加成功~~~',
@@ -176,6 +192,16 @@ const submitForm = async () => {
 </script>
 
 <style lang="less" scoped>
+.count {
+  color: #f56c6c;
+  font-size: 12px;
+  line-height: 1;
+  padding-top: 2px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
 .el-form {
   margin-top: 50px;
 }

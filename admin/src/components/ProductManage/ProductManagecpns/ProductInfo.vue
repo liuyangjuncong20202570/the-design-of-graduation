@@ -41,10 +41,6 @@
         >总库存不可为空，且子属性所含库存不可超过总库存</span
       >
     </el-form-item>
-    <el-form-item label="产品价格">
-      <el-input v-model="productInfos.price" />
-      <span v-if="productInfos.price === 0" class="price">价格不可为空并且为数字</span>
-    </el-form-item>
     <el-form-item label="产品品牌">
       <el-input v-model="productInfos.productBrand" />
       <span v-if="!productInfos.productBrand" class="brand">产品品牌不可为空</span>
@@ -77,7 +73,6 @@ const newArr = ref([]);
 const uniqueArr = ref([]);
 const productInfos = reactive({
   totalStore: 0,
-  price: 0,
   productBrand: '',
   productType: '',
   productMteri: '',

@@ -6,10 +6,11 @@ var ProductTypeRouter = express.Router();
 
 //添加型号
 ProductTypeRouter.post(
-  '/LYapi/admin/producttype/add',
-  upload.single('file'),
-  ProductTypeController.add
+  '/LYapi/admin/producttype/addImages',
+  upload.array('images'),
+  ProductTypeController.addImages
 );
+ProductTypeRouter.post('/LYapi/admin/producttype/addInfos', ProductTypeController.addInfos);
 //删除该数据
 ProductTypeRouter.delete('/LYapi/admin/producttype/delList/:id', ProductTypeController.delList);
 

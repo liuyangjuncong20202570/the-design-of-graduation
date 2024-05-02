@@ -2,11 +2,9 @@ const ProductInfoService = require('../../services/admin/ProductInfoService.js')
 
 const ProductInfoController = {
   add: async (req, res) => {
-    const { price, productAge, productBrand, productMteri, productType, totalStore, _id } =
-      req.body;
+    const { productAge, productBrand, productMteri, productType, totalStore, _id } = req.body;
     try {
       await ProductInfoService.add({
-        price,
         productAge,
         productBrand,
         productMteri,
@@ -35,6 +33,20 @@ const ProductInfoController = {
     } else {
       res.send({
         ActionType: 'error'
+      });
+    }
+  },
+  getInfo: async (req, res) => {
+    const result = await ProductInfoService.getInfo({ productId: req.params.id });
+    if (result) {
+      res.send({
+        ActionType: 'OK',
+        data: result
+      });
+    } else {
+      res.send({
+        ActionType: 'error',
+        code: '508'
       });
     }
   }

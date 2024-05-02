@@ -1,8 +1,9 @@
 const ProductModel = require('../../models/ProductModel.js');
 
 const ProductService = {
-  add: async ({ title, category, content, cover, isPublish, editTime }) => {
+  add: async ({ price, title, category, content, cover, isPublish, editTime }) => {
     const newData = await ProductModel.create({
+      price,
       title,
       category,
       content,

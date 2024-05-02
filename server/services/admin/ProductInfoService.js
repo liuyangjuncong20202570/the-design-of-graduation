@@ -1,9 +1,8 @@
 const ProductInfoModel = require('../../models/ProductInfoModel');
 
 const ProductInfoService = {
-  add: async ({ price, productAge, productBrand, productMteri, productType, totalStore, _id }) => {
+  add: async ({ productAge, productBrand, productMteri, productType, totalStore, _id }) => {
     return ProductInfoModel.create({
-      price,
       productAge,
       productBrand,
       productMteri,
@@ -14,6 +13,9 @@ const ProductInfoService = {
   },
   delList: async ({ productId }) => {
     return ProductInfoModel.deleteOne({ productId });
+  },
+  getInfo: async ({ productId }) => {
+    return ProductInfoModel.find({ productId });
   }
 };
 

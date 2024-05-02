@@ -18,6 +18,34 @@ const ProductController = {
         data: []
       });
     }
+  },
+  getFresh: async (req, res) => {
+    const result = await ProductService.getFresh({ category: req.params.category });
+    if (result) {
+      res.send({
+        ActionType: 'OK',
+        data: result
+      });
+    } else {
+      res.send({
+        ActionType: 'error',
+        code: '501'
+      });
+    }
+  },
+  getSingle: async (req, res) => {
+    const result = await ProductService.getSingle({ _id: req.params.id });
+    if (result) {
+      res.send({
+        ActionType: 'OK',
+        data: result
+      });
+    } else {
+      res.send({
+        ActionType: 'error',
+        code: '508'
+      });
+    }
   }
 };
 

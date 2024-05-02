@@ -61,6 +61,11 @@ const router = createRouter({
           component: () => import('@/views/Order/Order.vue')
         }
       ]
+    },
+    {
+      path: '/products/:id',
+      name: 'productsSingle',
+      component: () => import('@/views/Product/ProductCpns/SingleProducts.vue')
     }
   ]
 });

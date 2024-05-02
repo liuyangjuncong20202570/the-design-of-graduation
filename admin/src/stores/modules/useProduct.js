@@ -8,7 +8,8 @@ import {
   UpdProductList,
   DelProduct,
   DelProductInfo,
-  DelProductType
+  DelProductType,
+  AddProductTypeInfo
 } from '@/services/modules/productInfo';
 import { defineStore } from 'pinia';
 
@@ -20,11 +21,19 @@ const useProduct = defineStore('Product', {
     // productInfo: []
   }),
   actions: {
-    async fetchProductAdd(basic, info, type) {
+    async fetchProductAdd(basic, info, images, type) {
       const { ActionType, _id } = await AddProductBasic(basic);
       const { ActionType: ActionTypeInfo } = await AddProductInfo({ ...info, _id });
-      const { ActionType: ActionTypeType } = await AddProductType({ type, _id });
-      if (ActionType === 'OK' && ActionTypeInfo === 'OK' && ActionTypeType === 'OK') {
+      images.append('_id', _id);
+      console.log({ ...type, _id });
+      const { ActionType: ActionTypeInfo2 } = await AddProductTypeInfo({ type, _id });
+      const { ActionType: ActionTypeType } = await AddProductType(images);
+      if (
+        ActionType === 'OK' &&
+        ActionTypeInfo === 'OK' &&
+        ActionTypeType === 'OK' &&
+        ActionTypeInfo2 === 'OK'
+      ) {
         return true;
       } else {
         return false;

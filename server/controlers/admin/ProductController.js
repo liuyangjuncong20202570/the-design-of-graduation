@@ -3,9 +3,11 @@ const ProductController = {
   add: async (req, res) => {
     // 调用service对数据库进行增删改查
     const cover = req.file ? `/productuploads/${req.file.filename}` : '';
-    const { title, category, content } = req.body;
+    console.log(req.file);
+    const { price, title, category, content } = req.body;
     try {
       const _id = await ProductService.add({
+        price: Number(price),
         title,
         category: Number(category),
         content,

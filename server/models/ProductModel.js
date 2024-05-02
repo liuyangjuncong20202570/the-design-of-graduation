@@ -8,7 +8,8 @@ const productType = {
   content: String, //商品内容
   cover: String, //封面
   isPublish: Number, //是否发布一开始默认不发布为0
-  editTime: Date //编辑时间
+  editTime: Date, //编辑时间
+  price: Number
 };
 // 创建use实例
 const ProductModel = mongoose.model('product', new Schema(productType));

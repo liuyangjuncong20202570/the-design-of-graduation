@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 // user模型 ===> user集合（user表 ）
 const productInfoType = {
-  price: Number, //总单价
   productAge: String, //适用人群
   productBrand: String, //产品品牌
   productMteri: String, //产品原料

@@ -1,15 +1,30 @@
 const ProductTypeModel = require('../../models/ProductTypeModel');
 
 const ProductTypeService = {
-  add: async ({ size, _id, slideCovers }) => {
+  addInfos: async ({ type, _id }) => {
+    console.log(type);
     return ProductTypeModel.create({
-      size,
-      productId: _id,
-      slideCovers
+      size: type,
+      slideCovers: null,
+      productId: _id
     });
+  },
+  addImages: async ({ _id, slideCovers }) => {
+    console.log(slideCovers, _id);
+    // const id = new ObjectId(_id);
+    try {
+      console.log('111');
+      return await ProductTypeModel.updateOne({ productId: _id }, { slideCovers });
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   },
   delList: async ({ productId }) => {
     return ProductTypeModel.deleteOne({ productId });
+  },
+  getType: async ({ productId }) => {
+    return ProductTypeModel.find({ productId });
   }
 };
 

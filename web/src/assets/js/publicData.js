@@ -96,3 +96,7 @@ export const validateData = {
     }
   ]
 };
+
+export const getAssetsFile = url => {
+  return new URL(`../avatars/${url}`, import.meta.url).href;
+};
