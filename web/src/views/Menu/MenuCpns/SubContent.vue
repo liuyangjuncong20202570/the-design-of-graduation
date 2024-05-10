@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-side">
     <div class="xtx-member-aside">
       <div class="user-manage">
         <h4>我的账户</h4>
@@ -27,7 +27,8 @@ const { gestData } = storeToRefs(gestStore);
 </script>
 
 <style lang="less" scoped>
-.container {
+.container-side {
+  margin-top: 20px;
   position: absolute;
   top: 50%;
   left: 50%;

@@ -16,6 +16,9 @@ const webNewsRouter = require('./routes/web/NewsRouter');
 const ProductRouter = require('./routes/admin/ProductRouter');
 const GestRouter = require('./routes/web/GestRouter');
 const webProductRouter = require('./routes/web/ProductRouter');
+const CartRouter = require('./routes/web/CartRouter.js');
+const AddressRouter = require('./routes/web/AddressRouter');
+const OrderRouter = require('./routes/web/OrderRouter');
 
 var app = express();
 
@@ -75,6 +78,9 @@ app.use((req, res, next) => {
   }
 });
 
+app.use(OrderRouter);
+app.use(AddressRouter);
+app.use(CartRouter);
 app.use(GestRouter);
 app.use(UserRouter);
 app.use(NewsRouter);

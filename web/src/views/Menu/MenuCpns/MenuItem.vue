@@ -28,21 +28,38 @@
         <h4 data-v-bcb266e0="">猜你喜欢</h4>
       </div>
       <div class="goods-list">
-        <!-- <GoodsItem v-for="good in likeList" :key="good.id" :goods="good" /> -->
+        <GoodsItem
+          class="item"
+          v-for="good in likeList.slice(0, 4)"
+          :key="good._id"
+          :goods="good"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import GoodsItem from '@/components/publicCpns/GoodsItem.vue';
 import { MAINPORT } from '@/assets/js/publicData';
 import useGest from '../../../stores/modules/useGest';
 import { storeToRefs } from 'pinia';
+import useProduct from '@/stores/modules/useProduct';
 const gestStore = useGest();
 const { gestData, visible } = storeToRefs(gestStore);
 const handleClick = () => {
   visible.value = !visible.value;
 };
+const likeList = ref([]);
+onMounted(async () => {
+  const productStore = useProduct();
+  const res = await productStore.fetchFreshProduct(1);
+  if (res) {
+    const { diffProduct } = storeToRefs(productStore);
+    console.log(diffProduct.value);
+    likeList.value = diffProduct.value;
+  }
+});
 </script>
 
 <style lang="less" scoped>
@@ -137,6 +154,10 @@ const handleClick = () => {
   .goods-list {
     display: flex;
     justify-content: space-around;
+    .item {
+      width: 160px !important;
+      height: 260px !important;
+    }
   }
 }
 </style>

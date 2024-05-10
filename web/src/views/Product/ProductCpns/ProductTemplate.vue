@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <Header />
+  <Header />
+  <div class="wrapper-title">
     <ProductBanner />
     <div class="content">
       <ProductCatV1
@@ -70,7 +70,8 @@ onMounted(async () => {
 </script>
 
 <style lang="less" scoped>
-.wrapper {
+.wrapper-title {
+  margin-top: 130px;
   position: relative;
   .content {
     padding: 0 215px;

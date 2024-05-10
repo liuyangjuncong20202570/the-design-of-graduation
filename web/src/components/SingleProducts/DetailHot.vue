@@ -45,7 +45,6 @@ const getHotList = async () => {
   if (res) {
     // hotList.value = res.result?.slice(0, 3);
     const { diffProduct } = storeToRefs(productStore);
-    console.log(diffProduct.value);
     hotList.value = diffProduct.value.slice(0, 3);
   }
 };
@@ -59,9 +58,7 @@ const handleClick = async path => {
   const resInfo = await productStore.fetchSingleProductInfo(path);
   const resType = await productStore.fetchSingleProductType(path);
   if (res && resInfo && resType) {
-    console.log('1111');
     const { Product, ProductInfo, ProductType } = storeToRefs(productStore);
-    console.log(ProductType.value);
     emit('update', {
       productV1: Product.value[0],
       productV2: ProductInfo.value[0],
@@ -74,6 +71,7 @@ const handleClick = async path => {
 
 <style scoped lang="less">
 .goods-hot {
+  cursor: pointer;
   h3 {
     height: 70px;
     background: #e26237;
@@ -102,6 +100,13 @@ const handleClick = async path => {
 
     .name {
       font-size: 16px;
+      width: 200px;
+      overflow: hidden;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
     }
 
     .desc {
@@ -110,6 +115,7 @@ const handleClick = async path => {
     }
 
     .price {
+      margin: 0 auto;
       color: #cf4444;
       font-size: 20px;
     }

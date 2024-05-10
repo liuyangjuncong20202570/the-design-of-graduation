@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div class="news-header"></div>
-    <SearchBar :custome-style="customeStyle" :data-list="loopList" :path="path" />
+    <SearchBar
+      placeholder="请输入新闻标题"
+      :custome-style="customeStyle"
+      :data-list="loopList"
+      :path="path"
+    />
     <div class="wrapper">
       <div class="newest">
         <div class="title">

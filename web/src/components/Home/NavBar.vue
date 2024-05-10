@@ -5,13 +5,13 @@
     mode="horizontal"
     :router="true"
   >
-    <el-menu-item index="/home">首页</el-menu-item>
+    <!-- <el-menu-item index="/home">首页</el-menu-item> -->
     <el-menu-item index="/news">新闻中心</el-menu-item>
     <el-menu-item index="/product">产品与服务</el-menu-item>
     <el-menu-item @click="handleClick" :index="bindRoute">个人中心</el-menu-item>
     <!-- <el-menu-item v-else @click="handleClick2">个人中心</el-menu-item> -->
   </el-menu>
-  <div class="right">时代新闻网</div>
+  <div class="right">博远电商网</div>
 </template>
 
 <script setup>

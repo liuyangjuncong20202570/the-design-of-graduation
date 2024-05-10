@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <Header />
+  <div class="container-single">
     <AsyncProductInfo
       @update="handleUpdate"
       :goods="product"
@@ -12,7 +13,7 @@
 </template>
 
 <script setup>
-import ProductInfo from '@/components/SingleProducts/ProductInfo.vue';
+import Header from '@/views/Layout/Header.vue';
 import { useRoute } from 'vue-router';
 import LayoutFooter from '@/components/LayoutFooter/LayoutFooter.vue';
 import useProduct from '@/stores/modules/useProduct';
@@ -47,7 +48,8 @@ const handleUpdate = value => {
 </script>
 
 <style lang="less" scoped>
-.container {
+.container-single {
+  margin-top: 130px;
   display: flex;
   justify-content: center;
   align-items: center;

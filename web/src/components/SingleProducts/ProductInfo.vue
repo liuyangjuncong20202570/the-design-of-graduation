@@ -64,7 +64,7 @@
                       <template v-for="(idw, index2) in item.children">
                         <div
                           @click="handleSku(index1, index2)"
-                          :class="{ item: true, active: activeArr[index1].value === index2 }"
+                          :class="{ item: true, active: activeArr[index1]?.value === index2 }"
                         >
                           {{ idw.elName }}
                         </div>
@@ -131,15 +131,24 @@
 </template>
 
 <script setup>
+import { emitter } from '@/assets/js/EventEmitter';
 import DetailHot from '@/components/SingleProducts/DetailHot.vue';
 import ImageView from '../../components/ImageView/ImageView.vue';
+import useCart from '@/stores/modules/useCart';
+import { ElMessage } from 'element-plus';
+import useGest from '@/stores/modules/useGest';
+import { storeToRefs } from 'pinia';
 const activeArr = [];
+const GestStore = useGest();
+const { gestData } = storeToRefs(GestStore);
+
 const productMsg = reactive({
   count: 0,
   productId: 0,
   price: 0,
   size: [],
-  store: 0
+  store: 0,
+  gestId: gestData.value._id
 });
 const props = defineProps({
   goods: {
@@ -205,16 +214,30 @@ const emit = defineEmits(['update']);
 const handleUpdate = value => {
   emit('update', value);
 };
-
-const addCart = () => {
+const CartStore = useCart();
+const addCart = async () => {
   console.log(productMsg);
+  emitter.emit('flushCart');
+  const res = await CartStore.fetchAddCart(productMsg);
+  if (res) {
+    ElMessage({
+      message: '已加入购物车~',
+      type: 'success'
+    });
+  } else {
+    ElMessage({
+      message: '加入失败，请检查网络连接',
+      type: 'error'
+    });
+  }
 };
 </script>
 
 <style lang="less" scoped>
 .xtx-goods-page {
+  margin-top: 30px;
   .active {
-    border: 1px solid #27ba9b;
+    border: 1px solid #27ba9b !important;
   }
   .store {
     height: 30px;
@@ -254,6 +277,7 @@ const addCart = () => {
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
+          border: 1px solid transparent;
           &:hover {
             // border-color: #27ba9b;
             border: 1px solid #27ba9b;

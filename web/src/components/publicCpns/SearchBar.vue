@@ -7,7 +7,7 @@
           type="search"
           size="large"
           v-model="searchText"
-          placeholder="请输入新闻标题"
+          :placeholder="props.placeholder"
           class="input-with-select"
           @input="visible = true"
           @blur="hidePopover"
@@ -58,6 +58,9 @@ const props = defineProps({
   dataList: {
     type: Array,
     default: []
+  },
+  placeholder: {
+    type: String
   }
 });
 // const loopList = ref([]);

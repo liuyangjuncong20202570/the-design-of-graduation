@@ -34,3 +34,4 @@ export const getSingleProductType = value => {
     url: `/web/product/getSingleType/${value}`
   });
 };
+

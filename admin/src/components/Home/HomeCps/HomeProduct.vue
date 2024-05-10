@@ -28,9 +28,9 @@ import { storeToRefs } from 'pinia';
 const productStore = useProduct();
 const loopList = ref();
 onMounted(async () => {
-  await productStore.fetchProductInfo();
-  const { productInfo } = storeToRefs(productStore);
-  loopList.value = productInfo.value;
+  await productStore.fetchProductList();
+  const { productList } = storeToRefs(productStore);
+  loopList.value = productList.value;
 });
 </script>
 
